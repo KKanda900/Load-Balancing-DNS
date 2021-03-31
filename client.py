@@ -3,9 +3,9 @@
 @author: Shila Basu (sb1825)
 '''
 
-import time, random, socket, sys
+import time, random, socket, sys, os
 
-f = open("RESOLVED.txt", "a") # create the file we are going to write to
+f = None
 
 '''
 query_hostname_table takes in no arguments and returns a dictionary containing all the hostnames to be
@@ -19,6 +19,9 @@ def query_hostname_table():
     hostnames_queries = file.read().splitlines()
     file.close()
 
+    for i in range(len(hostnames_queries)):
+        hostnames_queries[i] = hostnames_queries[i].lower()
+        
     return hostnames_queries
 
 '''
@@ -75,4 +78,11 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Incorrect Usage: python client.py <LS hostname> <LS server port number>")
         sys.exit(1)
+
+    if os.path.exists('RESOLVED.txt') == True:
+        open('RESOLVED.txt', 'w').close()
+        f = open("RESOLVED.txt", "a") # create the file we are going to write to
+    else:
+        f = open("RESOLVED.txt", "a") # create the file we are going to write to
+
     client()

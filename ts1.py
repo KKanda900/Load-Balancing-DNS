@@ -13,7 +13,6 @@ The purpose of this method is to create a table that the TS server can iterate t
 client the information its looking for. Otherwise if the information can't be found it will be give it an
 error and send the error string back to the client.
 '''
-
 def create_tsdns_table():
     tsdns_table = {}
 
